@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">RTSIWidget</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="ticker">RTS</string>
+    <string name="web_service">http://iss.moex.com/iss/engines/stock/markets/index/boards/RTSI/securities/RTSI.xml?iss.meta=off</string>
 </resources>

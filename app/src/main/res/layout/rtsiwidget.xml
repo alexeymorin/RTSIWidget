@@ -1,21 +1,49 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#09C"
-                android:padding="@dimen/widget_margin">
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/widget_padding"
+            android:layout_margin="8dp"
+            android:columnCount="3"
+            android:orientation="horizontal"
+            android:background="@null">
 
     <TextView
-        android:id="@+id/appwidget_text"
+        android:id="@+id/ticker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:background="#09C"
-        android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
         android:textColor="#ffffff"
-        android:textSize="24sp"
+        android:text="RTSI"
+        android:textSize="32sp"
         android:textStyle="bold|italic"/>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/valueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="1195.61"
+        android:textSize="18sp"/>
+
+    <ImageButton
+        android:id="@+id/refreshImageButton"
+        android:layout_rowSpan="2"
+        android:layout_gravity="bottom"
+        android:background="@drawable/ic_refresh_24dp"/>
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-01-27 18:50:00"
+        android:textSize="10sp"/>
+
+    <TextView
+        android:id="@+id/changeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:text="+2.75"
+        android:textSize="18sp"
+        android:textColor="@color/colorUp"/>
+
+</GridLayout>
