@@ -93,6 +93,7 @@ public class RTSIWidget extends AppWidgetProvider {
                             } else {
                                 lastchangeprc = "-" + lastchangeprc;
                             }
+                            lastchangeprc = lastchangeprc + "%";
                             String time = parser.getAttributeValue("", "TIME");
                             String tradedate = parser.getAttributeValue("", "TRADEDATE");
                             Log.i("RTSIWidget", "parser.getAttributeCount() = " + parser.getAttributeCount());
