@@ -28,7 +28,7 @@
         android:id="@+id/refreshImageButton"
         android:layout_rowSpan="2"
         android:layout_gravity="bottom"
-        android:background="@drawable/ic_refresh_24dp"/>
+        android:background="@drawable/refresh_selector"/>
 
     <TextView
         android:id="@+id/timeTextView"
