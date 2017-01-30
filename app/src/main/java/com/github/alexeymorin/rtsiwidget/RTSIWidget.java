@@ -90,8 +90,6 @@ public class RTSIWidget extends AppWidgetProvider {
                             double lastchangeprc_d = Double.parseDouble(lastchangeprc);
                             if (lastchangeprc_d >= 0) {
                                 lastchangeprc = "+" + lastchangeprc;
-                            } else {
-                                lastchangeprc = "-" + lastchangeprc;
                             }
                             lastchangeprc = lastchangeprc + "%";
                             String time = parser.getAttributeValue("", "TIME");
