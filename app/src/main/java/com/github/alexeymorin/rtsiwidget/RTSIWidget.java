@@ -20,28 +20,9 @@ import java.net.URL;
  */
 public class RTSIWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Security security) {
-        Log.i("RTSIWidget", "updateAppWidget");
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.rtsiwidget);
-        views.setTextViewText(R.id.ticker, security.secId);
-        views.setTextViewText(R.id.changeTextView, security.lastChangePrc);
-        // getColor(int) is deprecation
-        if (security.lastChangePrc.charAt(0) == '+') {
-            views.setTextColor(R.id.changeTextView, context.getResources().getColor(R.color.colorUp));
-        } else {
-            views.setTextColor(R.id.changeTextView, context.getResources().getColor(R.color.colorDown));
-        }
-        views.setTextViewText(R.id.timeTextView, security.tradeDate + " " + security.time);
-        views.setTextViewText(R.id.valueTextView, security.currentValue);
-
-        Intent intent = new Intent(context, RTSIWidget.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int []{appWidgetId});
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.refreshImageButton, pendingIntent);
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+    @Override
+    public void onEnabled(Context context) {
+        super.onEnabled(context);
     }
 
     @Override
@@ -114,8 +95,25 @@ public class RTSIWidget extends AppWidgetProvider {
         protected void onPostExecute(Security security) {
             if (security == null)
                 return;
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.rtsiwidget);
+            Intent intent = new Intent(context, RTSIWidget.class);
+            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setOnClickPendingIntent(R.id.refreshImageButton, pendingIntent);
+            views.setTextViewText(R.id.ticker, security.secId);
+            views.setTextViewText(R.id.changeTextView, security.lastChangePrc);
+            // getColor(int) is deprecation
+            if (security.lastChangePrc.charAt(0) == '+') {
+                views.setTextColor(R.id.changeTextView, context.getResources().getColor(R.color.colorUp));
+            } else {
+                views.setTextColor(R.id.changeTextView, context.getResources().getColor(R.color.colorDown));
+            }
+            views.setTextViewText(R.id.timeTextView, security.tradeDate + " " + security.time);
+            views.setTextViewText(R.id.valueTextView, security.currentValue);
             for (int appWidgetId : appWidgetIds) {
-                updateAppWidget(context, appWidgetManager, appWidgetId, security);
+                // Instruct the widget manager to update the widget
+                appWidgetManager.updateAppWidget(appWidgetId, views);
             }
         }
     }
